@@ -10,13 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.udacity.notepad.crud.CreateActivity;
+import com.udacity.notepad.crud.CreateNoteActivity;
 import com.udacity.notepad.recycler.NotesAdapter;
 import com.udacity.notepad.util.SpaceItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recycler;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,31 +30,28 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(CreateActivity.get(MainActivity.this));
+                startActivity(CreateNoteActivity.get(MainActivity.this));
             }
         });
 
-        recycler = findViewById(R.id.recycler);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.addItemDecoration(new SpaceItemDecoration(this, R.dimen.margin_small));
-        recycler.setAdapter(new NotesAdapter(this));
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(this, R.dimen.margin_small));
+        recyclerView.setAdapter(new NotesAdapter());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        refresh();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        recycler.setAdapter(null);
+        // I would make the call here instead of having a method for that
+        // It is one line of code and it is not reused
+        refreshAdapter();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        // Note that this menu is unused. Are we planning to use it later on?
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -72,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    private void refresh() {
-        ((NotesAdapter) recycler.getAdapter()).refresh();
+    private void refreshAdapter() {
+        // I would have the NotesAdapter as a field rather than retrieving and casting it every time
+        ((NotesAdapter) recyclerView.getAdapter()).refresh();
     }
 }

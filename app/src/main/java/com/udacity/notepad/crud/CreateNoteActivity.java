@@ -15,10 +15,13 @@ import com.udacity.notepad.data.Note;
 
 import java.util.Date;
 
-public class CreateActivity extends AppCompatActivity {
+public class CreateNoteActivity extends AppCompatActivity {
 
+    // I have used a similar pattern but in this case I do not see the benefit
+    // Also the name of the method is not representative of what the method does
+    // but I am struggling to come out with a suggestion
     public static Intent get(Context context) {
-        return new Intent(context, CreateActivity.class);
+        return new Intent(context, CreateNoteActivity.class);
     }
 
     private TextView editText;
@@ -40,7 +43,7 @@ public class CreateActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_accept:
-                save();
+                saveNote();
                 finish();
                 break;
             default:
@@ -49,17 +52,19 @@ public class CreateActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void save() {
+    // Just trying to make method names more descriptive
+    private void saveNote() {
+        // Note that there is no validation so an empty note can be created
         DataStore.execute(new Runnable() {
             @Override
             public void run() {
-                Note note = updateNote();
-                DataStore.getNotes().insert(note);
+                Note note = createNote();
+                DataStore.getNotesDao().insert(note);
             }
         });
     }
 
-    private Note updateNote() {
+    private Note createNote() {
         Note note = new Note();
         note.setText(editText.getText().toString());
         note.setUpdatedAt(new Date());

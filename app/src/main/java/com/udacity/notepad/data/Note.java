@@ -4,7 +4,11 @@ import android.support.annotation.Nullable;
 
 import java.util.Date;
 
+// This is a POJO/Model class, should be in a model package
+// It does not make sense in the same package than the contract or the open helper
 public class Note {
+    // Most classes and interfaces start with an empty line. Added here for consistency
+
     private int id = -1;
     @Nullable private String text;
     private boolean isPinned = false;
