@@ -22,9 +22,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private List<Note> notes = new ArrayList<>();
     private boolean isRefreshing = false;
 
-    // The context is not necessary
-    // see onCreateViewHolder
-    public NotesAdapter() {
+    public NotesAdapter(Context context) {
+        this.context = context;
         setHasStableIds(true);
     }
 
@@ -45,11 +44,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     @Override
     public NotesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (context == null) {
-            context = parent.getContext();
-        }
-        // Here is why the context is not necessary to be pass to the constructor,
-        // it can be retrieved from the parent
         View view = LayoutInflater.from(context).inflate(R.layout.item_note, parent, false);
         return new NotesViewHolder(view);
     }
@@ -61,8 +55,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     }
 
     public void refresh() {
-        // Although it is accepted in Android code style I think that there are
-        // advantages on having the curly braces consistently
         if (isRefreshing) {
             return;
         }
