@@ -29,7 +29,6 @@ public class NotesDao {
                 null,
                 null,
                 NoteEntry.CREATED_AT);
-        // retval is not a descriptive name
         List<Note> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
             notes.add(fromCursor(cursor));
