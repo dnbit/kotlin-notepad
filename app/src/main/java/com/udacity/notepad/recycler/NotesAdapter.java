@@ -18,7 +18,7 @@ import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Note> notes = new ArrayList<>();
     private boolean isRefreshing = false;
 
