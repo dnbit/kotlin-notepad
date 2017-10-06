@@ -9,19 +9,6 @@ import android.view.View;
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private final int space;
-
-    // This class performs unnecessary operations
-    // The 'instanceof' is a clear indicator of something weird
-    // The return -1 in getOrientation is ignored by the switch
-    // (Note that non of the cases in the switch matches the value -1)
-    // Instead the following constructor can be used:
-
-    // public SpaceItemDecoration(Context context, int dimenRes, int orientation)
-
-    // adding the orientation in the constructor, which is known by the caller
-    // no need to calculate that at all (Notice that it is being calculated in every element draw!!)
-    // the switch would be smooth and the code much simpler
-    // getOrientation would not be necessary any more
     public SpaceItemDecoration(Context context, int dimenRes) {
         space = context.getResources().getDimensionPixelOffset(dimenRes);
     }
