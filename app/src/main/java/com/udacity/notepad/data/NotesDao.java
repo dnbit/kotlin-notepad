@@ -13,8 +13,6 @@ import java.util.List;
 
 import static android.provider.BaseColumns._ID;
 
-// This class is not a database, therefore the name NoteDatabase will cause confusion
-// Is NotesDao a good name for this class? Any better idea?
 public class NotesDao {
 
     private final NotesOpenHelper helper;
@@ -24,7 +22,6 @@ public class NotesDao {
     }
 
     public List<Note> getAll() {
-        // With the imports this way this becomes much more readable in my opinion
         Cursor cursor = helper.getReadableDatabase().query(NoteEntry.TABLE_NAME,
                 null,
                 null,
