@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // I would make the call here instead of having a method for that
-        // It is one line of code and it is not reused
         refreshAdapter();
     }
 
