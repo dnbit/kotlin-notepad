@@ -51,15 +51,6 @@ public class NotesDao {
             args[i] = Integer.toString(ids[i]);
         }
 
-        // This is adding "?" to the selection that would be then replace by the args
-        // In this case it does not seem a good approach because:
-        // - You do 2 loops + the query method would need to put everything in place
-        // - SQL cannot handle an infinite number of "?" without an AND
-        //   so the query will crash if the number of "?" is big enough
-        // I would suggest to add the ids directly into the selection and do not use args
-        // in this case as the number of args is unknown. This will solve the problem above
-        // looping once only. Still, this method is unused. Are we planning to use it later on?
-
         String selection = _ID + " IN (" + questionMarks.toString() + ")";
         Cursor cursor = helper.getReadableDatabase().query(NoteEntry.TABLE_NAME,
                 null,
@@ -92,8 +83,6 @@ public class NotesDao {
         helper.getWritableDatabase().update(NoteEntry.TABLE_NAME,
                 values,
                 _ID + " = ?",
-                // This is not very readable and it can be extracted to a method
-                // as it is repeated in the method below
                 new String[]{ Integer.toString(note.getId()) });
     }
 
@@ -103,7 +92,6 @@ public class NotesDao {
                 new String[]{ Integer.toString(note.getId()) });
     }
 
-    // The names of the methods below are not descriptive of what they actually do
     private static Note fromCursor(Cursor cursor) {
         int col = 0;
         Note note = new Note();
