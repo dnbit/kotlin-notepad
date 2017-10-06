@@ -95,10 +95,6 @@ public class NotesDao {
     private static Note fromCursor(Cursor cursor) {
         int col = 0;
         Note note = new Note();
-        // using col++ is a source of future problems
-        // this should be referring to the contract
-        // example:
-        // note.setId(cursor.getInt(cursor.getColumnIndex(NoteEntry._ID)));
         note.setId(cursor.getInt(col++));
         note.setText(cursor.getString(col++));
         note.setPinned(cursor.getInt(col++) != 0);
