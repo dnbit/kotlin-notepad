@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SpaceItemDecoration(this, R.dimen.margin_small));
-        recyclerView.setAdapter(new NotesAdapter());
+        recyclerView.setAdapter(new NotesAdapter(this));
     }
 
     @Override
