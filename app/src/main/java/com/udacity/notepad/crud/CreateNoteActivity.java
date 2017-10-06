@@ -16,10 +16,7 @@ import com.udacity.notepad.data.Note;
 import java.util.Date;
 
 public class CreateNoteActivity extends AppCompatActivity {
-
-    // I have used a similar pattern but in this case I do not see the benefit
-    // Also the name of the method is not representative of what the method does
-    // but I am struggling to come out with a suggestion
+    
     public static Intent get(Context context) {
         return new Intent(context, CreateNoteActivity.class);
     }
@@ -52,9 +49,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Just trying to make method names more descriptive
     private void saveNote() {
-        // Note that there is no validation so an empty note can be created
         DataStore.execute(new Runnable() {
             @Override
             public void run() {
