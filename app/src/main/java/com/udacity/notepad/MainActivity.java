@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshAdapter() {
-        // I would have the NotesAdapter as a field rather than retrieving and casting it every time
         ((NotesAdapter) recyclerView.getAdapter()).refresh();
     }
 }
